@@ -5,7 +5,9 @@ import requests
 
 baseurl="https://www.timesmed.com/OnlinePharmacy/India-Online-Medicine/Page-"
 
-for file in range(2000,2001):
+first=input("Enter index page: ")
+
+for file in range(first,2151):
     url=baseurl+str(file)
     fin  = htmltext = requests.get(url).text
     print "Opening file & Parsing file "+str(file)
@@ -17,7 +19,7 @@ for file in range(2000,2001):
     for table in soup.findAll(id="prescription_tbl"):
         tablecount += 1
 # print "Processing Table #%d" % (tablecount)
-        with open('file'+str(tablecount)+str(file)+'.csv', 'wb') as csvfile:
+        with open(str(tablecount)+'file'+str(file)+'.csv', 'wb') as csvfile:
             fout = csv.writer(csvfile, delimiter=',', quotechar='"', quoting=csv.QUOTE_MINIMAL)
             for row in table.findAll('tr'):
                 cols = row.findAll(['td','th'])
